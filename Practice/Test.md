@@ -9,4 +9,4 @@ This is normal
 
 [This is a link](https://www.google.com/)
 
-![This is an image](Practice/images.png)
+![This is an image](https://github.com/D0n41d/IoT-Project/blob/main/Practice/images.png)
