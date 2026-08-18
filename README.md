@@ -1,7 +1,8 @@
 # College Bus Tracker — Initial Version (WiFi Hotspot)
 
 ## Overview
-This project focuses on developing an IoT-based solution.  
+
+The main objective of this project is to develop an IoT-based college bus tracking system that enables students to view the real-time location of the bus through wireless communication, similar to a “Where is my train?” system.
 
 ## Project idea
 ### College Bus Tracker — Initial Version (WiFi Hotspot)
@@ -17,23 +18,19 @@ This project focuses on developing an IoT-based solution.
 
 ## Objectives
 
-### Possible Objectives
+- To develop an IoT-based system for tracking the real-time location of a college bus.
 
-1. **To develop an IoT-based college bus tracking system** that allows students and staff to monitor the location of the college bus.
+- To allow students to know the current location of the bus without having to call the driver or college staff.
 
-2. **To use a Wi-Fi hotspot for wireless communication** between the bus tracking device and nearby users/devices.
+- To transmit the bus's location wirelessly from the bus to a monitoring device or user interface.
 
-3. **To provide real-time bus location information** so students can know whether the bus is approaching or has reached a particular location.
+- To display the bus's current position and movement on a simple tracking interface.
 
-4. **To reduce waiting time for students** by providing information about the bus's current location and estimated arrival.
+- To reduce uncertainty and waiting time for students waiting for the college bus.
 
-5. **To develop a low-cost and simple prototype** using commonly available IoT components such as a microcontroller, GPS module, and Wi-Fi module.
+- To provide a low-cost and easy-to-use bus tracking solution suitable for a college environment.
 
-6. **To enable communication between the bus and a monitoring system** without requiring complex wired connections.
-
-7. **To improve the efficiency of college transportation management** by providing useful information about bus movement.
-
-8. **To create a foundation for future improvements**, such as a mobile application, multiple-bus tracking, route monitoring, estimated time of arrival (ETA), and notifications.
+- To demonstrate the use of IoT technologies such as GPS, microcontrollers, and wireless communication in a real-world transportation application.
 
 ## Features
 - Feature 1
