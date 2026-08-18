@@ -4,7 +4,7 @@
 This project focuses on developing an IoT-based solution.  
 
 ## Project idea
-###College Bus Tracker — Initial Version (WiFi Hotspot)
+### College Bus Tracker — Initial Version (WiFi Hotspot)
 
 ## Team Members
 
