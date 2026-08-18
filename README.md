@@ -19,17 +19,11 @@ The main objective of this project is to develop an IoT-based college bus tracki
 ## Objectives
 
 - To develop an IoT-based system for tracking the real-time location of a college bus.
-
 - To allow students to know the current location of the bus without having to call the driver or college staff.
-
 - To transmit the bus's location wirelessly from the bus to a monitoring device or user interface.
-
 - To display the bus's current position and movement on a simple tracking interface.
-
 - To reduce uncertainty and waiting time for students waiting for the college bus.
-
 - To provide a low-cost and easy-to-use bus tracking solution suitable for a college environment.
-
 - To demonstrate the use of IoT technologies such as GPS, microcontrollers, and wireless communication in a real-world transportation application.
 
 ## Features
