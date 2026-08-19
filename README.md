@@ -40,9 +40,21 @@ The main objective of this project is to develop an IoT-based college bus tracki
 - Deploy and demonstrate the complete system.
 
 ## Features
-- Feature 1
-- Feature 2
-- Feature 3
+## Key Features of the Project
+
+1. **Real-Time Bus Tracking** – View the current location of the bus.
+2. **GPS-Based Location** – Accurately track the bus using GPS.
+3. **Live Map View** – Display the bus location on a digital map.
+4. **Wireless Data Transmission** – Send location data to the server through the internet.
+5. **Multiple Bus Support** – Track multiple college buses.
+6. **Route Information** – Display the assigned route of each bus.
+7. **Bus Status** – Show whether the bus is active, inactive, or offline.
+8. **Automatic Location Updates** – Update the bus position at regular intervals.
+9. **Student-Friendly Interface** – Simple interface for students to check buses.
+10. **Admin Management** – Allow admins to manage buses and routes.
+11. **Location History** – Store previous bus locations for monitoring.
+12. **ETA/Arrival Prediction** – Option to estimate the bus's arrival time.
+
 
 ## Technologies Used
 - Hardware: Esp32 Dev module
