@@ -4,7 +4,7 @@
 
 The **College Bus Tracker** is an IoT-based bus monitoring system designed to help students, parents, and the college transport office monitor the status of a college bus.
 
-The initial version uses an **ESP32**, the driver's **mobile hotspot**, and **college Wi-Fi** to communicate with a Flask server. The system records trip status, heartbeat updates, departure and arrival times, and displays the information through a web-based dashboard.
+The initial version uses an **ESP32**, the bus's **WiFi Modem**, and **college Wi-Fi** to communicate with a Flask server. The system records trip status, heartbeat updates, departure and arrival times, and displays the information through a web-based dashboard.
 
 ## Project idea
 
@@ -14,13 +14,12 @@ The ESP32 is installed on the college bus and is pre-configured with the driver'
 
 When the bus starts its trip:
 
-1. The driver turns on the mobile hotspot.
-2. The ESP32 connects to the hotspot.
+1. IoT system turns on.
+2. The ESP32 connects to the hotspot. System status updated to **Current location**
 3. The ESP32 sends a heartbeat to the college server every **30 seconds**.
-4. The driver uses a physical button to update the trip status.
-5. When the bus returns to campus, the ESP32 detects the college Wi-Fi.
-6. The ESP32 automatically switches to the college network.
-7. The system updates the status to **Arrived at Campus**.
+4. When the bus returns to campus, the ESP32 detects the college Wi-Fi.
+5. The ESP32 automatically switches to the college network.
+6. The system updates the status to **Arrived at Campus**.
 
 The dashboard displays the current bus status, last ping time, elapsed time, and the complete trip log for the day.
 
