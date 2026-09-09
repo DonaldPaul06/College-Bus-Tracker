@@ -142,12 +142,12 @@ The dashboard displays the current bus status, last ping time, elapsed time, and
                    │
                    ▼
         ┌─────────────────────┐
-        │   Web Dashboard      │
+        │   Web Dashboard     │
         │                     │
-        │ Bus Status           │
-        │ Last Ping            │
-        │ Elapsed Time         │
-        │ Trip Log             │
+        │ Bus Status          │
+        │ Last Ping           │
+        │ Elapsed Time        │
+        │ Trip Log            │
         └─────────────────────┘
 ```
 
