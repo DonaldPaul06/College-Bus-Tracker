@@ -211,6 +211,15 @@ Web Dashboard
 Live Bus Location on Map
 ```
 
+## Hardware Required
+
+ESP32 Dev Module
+Push Button
+Blue LED
+Yellow LED
+Red LED
+220Ω/330Ω Resistors
+
 This upgrade will transform the current **bus status tracking system** into a complete **real-time GPS bus tracking system**.
 
 ---
