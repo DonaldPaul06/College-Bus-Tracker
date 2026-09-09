@@ -10,12 +10,12 @@ The initial version uses an **ESP32**, the bus's **WiFi Modem**, and **college W
 
 ### College Bus Tracker — Initial Version (WiFi Hotspot)
 
-The ESP32 is installed on the college bus and is pre-configured with the driver's mobile hotspot and college Wi-Fi credentials.
+The ESP32 is installed on the college bus and is pre-configured with the bus's wifi and college Wi-Fi credentials.
 
 When the bus starts its trip:
 
 1. IoT system turns on.
-2. The ESP32 connects to the hotspot. System status updated to **Current location**
+2. The ESP32 connects to the bus wifi. System status updated to **Current location**
 3. The ESP32 sends a heartbeat to the college server every **30 seconds**.
 4. When the bus returns to campus, the ESP32 detects the college Wi-Fi.
 5. The ESP32 automatically switches to the college network.
