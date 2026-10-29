@@ -1,230 +1,99 @@
-# College Bus Tracker — Initial Version (WiFi Hotspot)
+# Local Bus Tracker (ESP32 + GPS + OpenStreetMap)
 
-## Overview
-
-The **College Bus Tracker** is an IoT-based bus monitoring system designed to help students, parents, and the college transport office monitor the status of a college bus.
-
-The initial version uses an **ESP32**, the bus's **WiFi Modem**, and **college Wi-Fi** to communicate with a Flask server. The system records trip status, heartbeat updates, departure and arrival times, and displays the information through a web-based dashboard.
-
-## Project idea
-
-### College Bus Tracker — Initial Version (WiFi Hotspot)
-
-The ESP32 is installed on the college bus and is pre-configured with the bus's wifi and college Wi-Fi credentials.
-
-When the bus starts its trip:
-
-1. IoT system turns on.
-2. The ESP32 connects to the bus wifi. System status updated to **Current location**
-3. The ESP32 sends a heartbeat to the college server every **30 seconds**.
-4. When the bus returns to campus, the ESP32 detects the college Wi-Fi.
-5. The ESP32 automatically switches to the college network.
-6. The system updates the status to **Arrived at Campus**.
-
-The dashboard displays the current bus status, last ping time, elapsed time, and the complete trip log for the day.
-
-## Team Members
-
-| No. | Name           |
-| --- | -------------- |
-| 1   | Felizya Shenil |
-| 2   | Aric Antony    |
-| 3   | Aldrin Antony  |
-| 4   | Donald P Paul  |
-
-## Objectives
-
-* To develop an **ESP32-based college bus tracking system**.
-* To monitor the **current trip status** of the bus.
-* To transmit bus status using **Wi-Fi and mobile hotspot connectivity**.
-* To automatically switch between **driver hotspot and college Wi-Fi**.
-* To provide regular **heartbeat updates** from the bus.
-* To record **departure and arrival times**.
-* To provide a web-based dashboard for monitoring.
-* To maintain a **daily trip log** for the transport office.
-* To provide a foundation for **future GPS-based live tracking**.
-
-## To Do List
-
-*  Define system requirements and architecture.
-*  Configure ESP32 with multiple Wi-Fi networks.
-*  Implement the driver button-based trip status system.
-*  Implement HTTP heartbeat communication.
-*  Develop the Flask server and SQLite database.
-*  Implement automatic Wi-Fi switching.
-*  Develop the college dashboard.
-*  Display live bus status and last ping time.
-*  Record daily departure and arrival details.
-*  Test and demonstrate the complete system.
-*  Add NEO-6M GPS module.
-*  Implement live GPS location tracking.
-*  Display the bus location on a map.
+A single-file Arduino sketch that turns an ESP32 and a NEO-6M GPS module into a self-hosted bus tracker. The ESP32 serves its own web page, so there is no external server, database or Node.js. Open the page from any phone or laptop on the same WiFi to see the bus live on OpenStreetMap, get notified when it reaches the college, and view a log of arrival times.
 
 ## Features
 
-## Key Features of the Project
+- Live bus position on an OpenStreetMap map (updates every 2 seconds)
+- Shows speed, satellite count and distance to the college
+- Green circle on the map marking the college arrival radius
+- Automatic arrival detection: logs **Arrived** when the bus enters the radius and **Left** when it exits
+- Arrival and departure times taken from the GPS clock (no internet clock needed)
+- On-screen banner when the bus arrives while the page is open
+- Event log of the last 20 arrivals/departures
+- Runs entirely on your local network
 
-1. **Real-Time Bus Status**
-   Displays the current status of the bus, such as Departed, En Route, and Arrived.
+## Hardware
 
-2. **Mobile Hotspot Connectivity**
-   The ESP32 connects to the driver's mobile hotspot when the bus is away from campus.
+| Part | Notes |
+|------|-------|
+| ESP32 dev board | Any common ESP32 DevKit |
+| NEO-6M GPS module | With antenna |
+| Jumper wires | |
+| 5V USB power | Power bank or vehicle USB adapter |
 
-3. **College Wi-Fi Detection**
-   The ESP32 detects the college Wi-Fi when the bus returns to campus.
+### Wiring
 
-4. **Automatic Wi-Fi Switching**
-   The system automatically switches between the driver's hotspot and college Wi-Fi.
+| GPS module | ESP32 |
+|------------|-------|
+| VCC | 3.3V (or 5V, depending on your module) |
+| GND | GND |
+| TX | GPIO16 |
+| RX | GPIO17 |
 
-5. **Trip Status Button**
-   A physical button allows the driver to cycle through the available trip statuses.
+## Software setup
 
-6. **LED Connection Indicator**
+1. Install the **Arduino IDE** and add ESP32 board support (Boards Manager, search "esp32").
+2. Install the **TinyGPSPlus** library by Mikal Hart (Library Manager).
+3. Open `bus_tracker_local.ino`.
+4. Edit the settings at the top of the file:
 
-   * 🔵 **Blue** — Connected to college Wi-Fi
-   * 🟡 **Yellow** — Connected to mobile hotspot
-   * 🔴 **Red** — No network connection
-
-7. **Heartbeat Updates**
-   The ESP32 sends a heartbeat update to the server every **30 seconds**.
-
-8. **Live Dashboard**
-   Displays the bus name, current status, last ping time, and elapsed time.
-
-9. **Trip Duration**
-   Records and displays the total duration of the bus trip.
-
-10. **Daily Trip Log**
-    Stores departure time, arrival time, and total trip duration.
-
-11. **SQLite Database**
-    Stores trip and status information locally on the Flask server.
-
-12. **GPS Upgrade Support**
-    The system can be extended with a **NEO-6M GPS module** for live location tracking and map visualization.
-
-## Technologies Used
-
-* **Hardware:** ESP32 Dev Module, Push Button, LEDs
-* **Software:** Arduino IDE, Flask
-* **Programming Languages:** C++, Python
-* **Database:** SQLite
-* **Communication:** Wi-Fi, HTTP
-* **Backend:** Python Flask
-* **Future Hardware Upgrade:** NEO-6M GPS Module
-
-## System Architecture
-
-```text
-        ┌─────────────────────┐
-        │     College Bus     │
-        │                     │
-        │       ESP32         │
-        │    ┌───────────┐    │
-        │    │   Button  │    │
-        │    └───────────┘    │
-        │    ┌───────────┐    │
-        │    │    LEDs   │    │
-        │    └───────────┘    │
-        └──────────┬──────────┘
-                   │
-          Wi-Fi / Mobile Hotspot
-                   │
-                   ▼
-        ┌─────────────────────┐
-        │    Flask Server     │
-        │                     │
-        │    HTTP API         │
-        │        │            │
-        │        ▼            │
-        │     SQLite          │
-        └──────────┬──────────┘
-                   │
-                   ▼
-        ┌─────────────────────┐
-        │   Web Dashboard     │
-        │                     │
-        │ Bus Status          │
-        │ Last Ping           │
-        │ Elapsed Time        │
-        │ Trip Log            │
-        └─────────────────────┘
+```cpp
+const char* WIFI_SSID = "YOUR_WIFI";
+const char* WIFI_PASS = "YOUR_PASSWORD";
+const double HOME_LAT = 10.0159;   // college latitude
+const double HOME_LNG = 76.3419;   // college longitude
+const double RADIUS_M = 150;       // arrival radius in metres
 ```
 
-## Trip Status Flow
+5. Select your ESP32 board and port, then upload.
+6. Open the Serial Monitor at **115200 baud**. It prints the address, for example `http://192.168.1.45`.
 
-```text
-        ┌───────────┐
-        │  Departed │
-        └─────┬─────┘
-              │
-              ▼
-        ┌───────────┐
-        │  En Route │
-        └─────┬─────┘
-              │
-              ▼
-        ┌───────────┐
-        │  Arrived  │
-        └─────┬─────┘
-              │
-              ▼
-    ┌─────────────────────┐
-    │ Arrived at Campus   │
-    └─────────────────────┘
-```
+## Using it
 
-## Future Improvements
+1. Place the GPS antenna with a clear view of the sky (near a window or outdoors). The first fix can take a minute or two.
+2. On a phone or laptop connected to the **same WiFi**, open the address shown in the Serial Monitor.
+3. The page shows:
+   - The bus marker, moving live
+   - The college circle
+   - A status badge: grey (waiting for GPS), orange (on the way, with distance), green (at college)
+   - The arrival log, newest first
 
-* Integrate a **NEO-6M GPS module**.
-* Track the bus's **live geographical location**.
-* Display the bus location on an interactive map.
-* Add estimated arrival time (**ETA**).
-* Support multiple buses and routes.
-* Add notifications for students and parents.
-* Add historical route tracking.
+To find your college coordinates, right-click the spot in Google Maps or OpenStreetMap and copy the latitude and longitude.
 
-## Project Deliverables
+## How it works
 
-* `bus_tracker.ino` — ESP32 firmware with multi-SSID Wi-Fi, button state machine, LED indicators, and HTTP heartbeat.
-* **Flask Server** — Backend API, SQLite trip logging, and dashboard.
-* **TV Dashboard** — Live bus status and daily trip log.
-* **Screenshots** — Dashboard screenshots showing En Route, Arrived, and trip log states.
-* **One-Page Report** — Connection logic, trip state machine, Wi-Fi switchover, and GPS upgrade plan.
+- The ESP32 reads NMEA data from the GPS on a hardware serial port and decodes it with TinyGPSPlus.
+- A small web server on port 80 serves two routes:
+  - `/` returns the map page (Leaflet and OpenStreetMap tiles load from the internet in the viewer's browser)
+  - `/data` returns live JSON: position, speed, satellites, distance, status, home location and the event log
+- On each new GPS position the sketch measures the distance to `HOME_LAT`/`HOME_LNG`:
+  - Inside `RADIUS_M` and previously outside: logs **Arrived**
+  - More than 20 m outside the radius and previously inside: logs **Left** (the 20 m margin prevents flicker from GPS drift)
+- Event times are stored as Unix timestamps from the GPS date/time and shown in the viewer's local time zone.
 
-## Future GPS Upgrade
+## Limitations
 
-The next version of the project will integrate a **NEO-6M GPS module** with the ESP32.
+- **One bus per ESP32.** For several buses, run one unit per bus (each has its own IP), or build a central server version.
+- **Local WiFi only.** The ESP32 must be on a network the viewer can reach. For a moving bus, use a phone hotspot or 4G router on the bus, with the viewing device on the same network.
+- **The viewing device needs internet** to load the map tiles and the Leaflet library. The ESP32 itself does not.
+- **The log is kept in memory** and is lost when the ESP32 restarts.
+- **No password or admin panel.** Change the college location and radius in the code and re-upload.
+- **No sound or push notifications**, only the on-screen banner.
+- The first-arrival banner may not appear if the page was opened while the log was empty (the log still updates). Events logged before the GPS has a valid date may show a 1970 timestamp.
 
-The GPS module will provide:
+## Troubleshooting
 
-```text
-Latitude
-Longitude
-   ↓
-ESP32
-   ↓
-Flask Server
-   ↓
-Web Dashboard
-   ↓
-Live Bus Location on Map
-```
+| Problem | What to check |
+|---------|---------------|
+| Serial Monitor shows only dots | Wrong WiFi name/password, or the network is 5 GHz only (ESP32 needs 2.4 GHz) |
+| Page says "Waiting for GPS" | Take the antenna outdoors or near a window; wait a few minutes; check TX/RX wiring (GPS TX goes to GPIO16) |
+| Map is grey or blank | The viewing device has no internet access |
+| Page won't open | Phone/laptop is on a different network, or the IP changed after a reboot |
+| Arrival not logging | Increase `RADIUS_M` (use at least 100 m), and double-check the college coordinates |
 
-## Hardware Required
+## Credits
 
-ESP32 Dev Module
-Push Button
-Blue LED
-Yellow LED
-Red LED
-220Ω/330Ω Resistors
-
-This upgrade will transform the current **bus status tracking system** into a complete **real-time GPS bus tracking system**.
-
----
-
-### Project Status
-
-**Current Version:** ✅ Initial Wi-Fi Hotspot Version
-**GPS Tracking:** 🔜 Future Upgrade
+- [TinyGPSPlus](https://github.com/mikalhart/TinyGPSPlus) by Mikal Hart
+- [Leaflet](https://leafletjs.com/) for the map interface
+- Map data © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors
