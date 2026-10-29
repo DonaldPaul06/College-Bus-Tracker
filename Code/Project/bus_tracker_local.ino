@@ -9,8 +9,8 @@
 #include <TinyGPSPlus.h>
 
 // ---------- EDIT THESE ----------
-const char* WIFI_SSID = "Redmi 10A";
-const char* WIFI_PASS = "11111111";
+const char* WIFI_SSID = "wifi_name";
+const char* WIFI_PASS = "wifi_pass";
 const double HOME_LAT = 10.727779;   // college latitude
 const double HOME_LNG = 76.290927;   // college longitude
 const double RADIUS_M = 150;       // arrival radius in metres
